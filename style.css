@@ -11,8 +11,9 @@ body {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
-    margin: 0px;
     background-color: rgb(5, 22, 30);
     margin-left: auto;
     margin-right: auto;
@@ -188,6 +189,7 @@ header img {
 
 footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 80px;
@@ -196,4 +198,15 @@ footer {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: lightblue;
+    text-decoration: underline;
 }
