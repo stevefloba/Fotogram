@@ -11,9 +11,9 @@ body {
 }
 
 body {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; */
     font-family: Arial, sans-serif;
     margin: 0px;
     background-color: rgb(5, 22, 30);
@@ -68,10 +68,27 @@ header img {
     /* passt sich an */
     gap: 15px;
     padding: 20px;
-    max-height: calc(3 * 200px + 2 * 15px);
-    /* max. 3 Zeilen */
-    overflow-y: auto;
-    /* Scrollbar, falls mehr Bilder */
+}
+
+.gallery-controls {
+    text-align: center;
+    margin: 20px 0;
+    margin-bottom: 40px;
+}
+
+#loadMore {
+    background-color: rgb(16, 65, 82);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+#loadMore:hover {
+    background-color: rgb(24, 90, 110);
 }
 
 .gallery img {

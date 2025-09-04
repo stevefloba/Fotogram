@@ -33,8 +33,8 @@ const imageFiles = [
     "foto30.jpg"
 ];
 
-// DOM-Elemente
 const gallery = document.querySelector('.gallery');
+const loadMoreBtn = document.getElementById('loadMore');
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -42,15 +42,35 @@ const closeBtn = document.querySelector('.lightbox .close');
 const lightboxPrev = document.querySelector('.lightbox-prev');
 const lightboxNext = document.querySelector('.lightbox-next');
 
-// Bilder in Galerie einfügen
-imageFiles.forEach(file => {
-    const img = document.createElement("img");
-    img.src = imageFolder + file;
-    img.alt = file;
-    gallery.appendChild(img);
-});
+let imagesPerLoad = 12;   // 3 Reihen á 4 Bilder (je nach Bildschirmbreite variabel)
+let currentIndex = 0;
+let slides = [];
 
-const slides = document.querySelectorAll('.gallery img');
+// Bilder laden
+function loadImages() {
+    const end = Math.min(currentIndex + imagesPerLoad, imageFiles.length);
+
+    for (let i = currentIndex; i < end; i++) {
+        const img = document.createElement("img");
+        img.src = imageFolder + imageFiles[i];
+        img.alt = imageFiles[i];
+        img.addEventListener('click', () => openLightbox(i));
+        gallery.appendChild(img);
+        slides.push(img);
+    }
+
+    currentIndex = end;
+
+    if (currentIndex >= imageFiles.length) {
+        loadMoreBtn.style.display = "none"; // Button ausblenden wenn alle Bilder da sind
+    }
+}
+
+// Initiale Ladung
+loadImages();
+
+// Button-Event
+loadMoreBtn.addEventListener('click', loadImages);
 
 // -------------------
 // Lightbox
@@ -68,12 +88,6 @@ function showLightboxSlide(i) {
     lightboxImg.src = slides[lightboxIndex].src;
 }
 
-// Klick-Events für Bilder
-slides.forEach((img, i) => {
-    img.addEventListener('click', () => openLightbox(i));
-});
-
-// Lightbox-Steuerung
 closeBtn.addEventListener('click', () => {
     lightbox.style.display = 'none';
 });
